@@ -19,14 +19,14 @@ public:
     COORD draw();
     void setFrameName( const string& fname ) { frameName_ = fname; };
     void resize( const COORD startPos, const int width, const int height );
+    void setFrameColor( const enum FONT_COLOR color );
 
 private:
     COORD   startPos_;
     int     width_;
     int     height_;
+    FONT_COLOR frameColor_;
     string  frameName_;
-
-    vector<vector<TILE>> frame_;
 
     void drawFrameName();
 }; // class Frame

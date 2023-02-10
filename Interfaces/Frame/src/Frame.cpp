@@ -6,7 +6,7 @@ Frame::Frame( COORD startPos, const int width, const int height )
     : startPos_(startPos)
     , width_( ( width / TILE_UNIT_WIDTH ) * TILE_UNIT_WIDTH ) // Frame 은 반드시 TILE_UNIT_WIDTH 의 배수여야 함
     , height_( height )
-    , frame_( width, vector<TILE>( height, TILE_1["EMPTY_TILE"] ) )
+    , frameColor_(FONT_COLOR::RESET)
 {
     if( startPos_.xPos + width_ > getConsoleWidth() )
         width_ = getConsoleWidth() - startPos_.xPos;
@@ -17,9 +17,17 @@ Frame::Frame( COORD startPos, const int width, const int height )
 
 COORD Frame::draw()
 {
+    setFontColor(frameColor_);
     COORD resPos = drawFrame(startPos_, width_, height_);
+    setFontColor(FONT_COLOR::RESET);
     this->drawFrameName();
     return resPos;
+}
+
+void Frame::setFrameColor( const enum FONT_COLOR color )
+{
+    if( color > FONT_COLOR::COLOR_START && color < FONT_COLOR::COLOR_END )
+        frameColor_ = color;
 }
 
 DEFINE FRAME_HEAD_PAD = 4;

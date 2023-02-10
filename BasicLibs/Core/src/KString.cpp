@@ -94,32 +94,6 @@ KString& KString::operator = ( const char*&& other ) noexcept
     return *this;
 }
 
-size_t KString::getWordsLength() noexcept
-{
-    return this->getWordsLength(orgStr);
-}
-
-size_t KString::getWordsLength( const std::string& str ) noexcept
-{
-    size_t len  = 0;
-    size_t i    = 0;
-
-    while( i < str.size() ) {
-        int char_size = 0;
-
-        if      ( ( str[i] & CHAR_SIZE_4_CHCK_FLAG ) == CHAR_SIZE_4_COMP_FLAG ) char_size += 4;
-        else if ( ( str[i] & CHAR_SIZE_3_CHCK_FLAG ) == CHAR_SIZE_3_COMP_FLAG ) char_size += 3;
-        else if ( ( str[i] & CHAR_SIZE_2_CHCK_FLAG ) == CHAR_SIZE_2_COMP_FLAG ) char_size += 2;
-        else if ( ( str[i] & CHAR_SIZE_1_CHCK_FLAG ) == CHAR_SIZE_1_COMP_FLAG ) char_size += 1;
-        else    char_size += 1;
-
-        i += char_size;
-        len++;
-    }
-
-    return len;
-}
-
 const char* KString::operator [] ( const int index )
 {
     size_t idx = static_cast<size_t>(index);
@@ -141,7 +115,6 @@ const char* KString::operator [] ( const int index )
         else if ( ( this->orgStr[i] & CHAR_SIZE_1_CHCK_FLAG ) == CHAR_SIZE_1_COMP_FLAG ) char_size += 1;
         else    char_size += 1;
 
-        // if( idx == len ) return orgStr.substr(i, char_size);
         if( idx == len ) {
             std::string subs = orgStr.substr(i, char_size);
             return subs.c_str();
@@ -166,58 +139,6 @@ KString& KString::operator += ( const KString& str )
     this->orgStr += str.orgStr;
     this->kLength = this->getWordsLength();
     return *this;
-}
-
-static BOOL checkWordInTileSize1( std::string word )
-{
-    for( auto& tile : TILE_1 ) {
-        if( word == tile.second ) return TRUE;
-    }
-    return FALSE;
-}
-
-size_t KString::getWordsWidth() noexcept
-{
-    size_t width = 0;
-    size_t i     = 0;
-    int j = 0;
-    KString check {this->orgStr};
-
-    while( i < this->orgStr.size() ) {
-        int char_width = 0;
-        int char_size  = 0;
-
-        // if( checkWordInTileSize1( check[j++] ) == TRUE ) char_width += 1;
-        if( ( this->orgStr[i] & CHAR_SIZE_4_CHCK_FLAG ) == CHAR_SIZE_4_COMP_FLAG ) {
-            char_size  += 4;
-            char_width += 2;
-        }
-        else if( ( this->orgStr[i] & CHAR_SIZE_3_CHCK_FLAG ) == CHAR_SIZE_3_COMP_FLAG ) {
-            char_size  += 3;
-            char_width += 2;
-        }
-        else if( ( this->orgStr[i] & CHAR_SIZE_2_CHCK_FLAG ) == CHAR_SIZE_2_COMP_FLAG ) {
-            char_size  += 2;
-            char_width += 2;
-        }
-        else if ( ( this->orgStr[i] & CHAR_SIZE_1_CHCK_FLAG ) == CHAR_SIZE_1_COMP_FLAG ) {
-            char_size  += 1;
-            char_width += 1;
-        }
-        else {
-            char_size  += 1;
-            char_width += 1;
-        }
-
-        std::string checkStr = check[j++];
-        if( checkWordInTileSize1( checkStr ) )
-            char_width = 1;
-
-        i += char_size;
-        width += char_width;
-    }
-
-    return width;
 }
 
 const char* KString::c_str() noexcept

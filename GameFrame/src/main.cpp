@@ -43,6 +43,9 @@ TestFrame::TestFrame()
     mapFrame.setFrameName("메인 화면");
     invFrame.setFrameName("인벤토리");
     logFrame.setFrameName("로그 시스템");
+
+    invFrame.setFrameColor(FONT_COLOR::YELLOW);
+    logFrame.setFrameColor(FONT_COLOR::SKY);
 }
 
 void TestFrame::draw()
@@ -71,16 +74,44 @@ int main()
 {
 // 화면 크기 고정 테스트 코드
 #if 1
-    TestFrame TF;
-    TF.draw();
+    // setCoord( {0, 0} );
+    // TestFrame TF;
+    // TF.draw();
 
-    while( TRUE ) {
-        if( TF.getFrameWidth() != getConsoleWidth() || TF.getFrameHeight() != getConsoleHeight() ) {
-            TF.resize();
-            TF.draw();
-        }
-        usleep(1000000/3);
-    }
+    // int i = 1;
+    // COORD co;
+
+    // while( TRUE ) {
+    //     if( TF.getFrameWidth() != getConsoleWidth() || TF.getFrameHeight() != getConsoleHeight() ) {
+    //         TF.resize();
+    //         TF.draw();
+    //     } else {
+    //         TF.draw();
+    //     }
+    //     setCoord({0, i++%getConsoleHeight()});
+    //     getCoord(co);
+    //     printf("---------- [%4d] INSERT MESSAGE TEST :: CurPos (%d, %d)", i, co.xPos, co.yPos);
+    //     usleep(1000000/3);
+    // }
+    system("clear");
+    setCoord( {1, 1} );
+    printf("abc [ %d, %d ]", getCoord().xPos, getCoord().yPos);    
+    setCoord( {0, 1}, MOVE_TYPE::RELATIVE_MOVEMENT );
+    // setCoord( {1, 1} );
+    printf("abc [ %d, %d ]", getCoord().xPos, getCoord().yPos);    
+    setCoord( {0, 1}, MOVE_TYPE::RELATIVE_MOVEMENT );
+    // setCoord( {2, 2} );
+    printf("abc [ %d, %d ]", getCoord().xPos, getCoord().yPos);    
+    setCoord( {0, 1}, MOVE_TYPE::RELATIVE_MOVEMENT );
+    // setCoord( {3, 4} );
+    printf("zza");
+    setCoord( {0, 1}, MOVE_TYPE::RELATIVE_MOVEMENT );
+    printf("가나다2");
+    setCoord( {0, 1}, MOVE_TYPE::RELATIVE_MOVEMENT );
+    printf("가나다라3");
+    printf("\n");
+    setCoord( {0, getConsoleHeight()} );
+    printf("HelloWord!! [%d]", getConsoleHeight());
 #endif
 
 // KString 테스트코드

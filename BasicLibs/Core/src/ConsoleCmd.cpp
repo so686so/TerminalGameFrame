@@ -4,8 +4,8 @@ using namespace std;
 
 string getStringResultFromCommand( const string&& cmd ) noexcept
 {
-    string result;
-    char buffer[CMD_MAX_LEN] = { '\0', };
+    string  result;
+    char    buffer[CMD_MAX_LEN] = { '\0', };
 
     // popen : 주어진 cmd 를 shell 로 실행하고 파이프 연결 후 fd 반환
     FILE* stream = popen( cmd.c_str(), "r" );
@@ -14,7 +14,6 @@ string getStringResultFromCommand( const string&& cmd ) noexcept
         while( fgets( buffer, CMD_MAX_LEN, stream ) != NULL ) result.append( buffer );
         pclose( stream );
     }
-
     return result;
 }
 
@@ -27,10 +26,10 @@ BOOL getConsoleSize( int& width, int& height )
         string        tokenString;
 
         getline( iss, tokenString, ' ' );
-        height = atoi( tokenString.c_str() );
+        height = stoi( tokenString );
 
         getline( iss, tokenString, ' ' );
-        width = atoi( tokenString.c_str() );
+        width = stoi( tokenString );
 
         return TRUE;
     }

@@ -16,15 +16,15 @@ ADD_SUBDIRECTORY( ${CMAKE_CURRENT_SOURCE_DIR}/BasicLibs )
 
 # Tier 2 Libs
 # ---------------------------------------------------------------------
-ADD_SUBDIRECTORY( ${CMAKE_CURRENT_SOURCE_DIR}/Key )
-ADD_SUBDIRECTORY( ${CMAKE_CURRENT_SOURCE_DIR}/Interfaces )
-# ADD_SUBDIRECTORY( ${CMAKE_CURRENT_SOURCE_DIR}/Objects )
-# ADD_SUBDIRECTORY( ${CMAKE_CURRENT_SOURCE_DIR}/Actions )
+ADD_SUBDIRECTORY( ${CMAKE_CURRENT_SOURCE_DIR}/Key )             # 입력 관련 제어
+ADD_SUBDIRECTORY( ${CMAKE_CURRENT_SOURCE_DIR}/Interfaces )      # 게임 인터페이스 모음
+# ADD_SUBDIRECTORY( ${CMAKE_CURRENT_SOURCE_DIR}/Actions )       # 게임 내 액션 클래스
 # ---------------------------------------------------------------------
 
 # Tier 3 Libs
 # ---------------------------------------------------------------------
-# ADD_SUBDIRECTORY( ${CMAKE_CURRENT_SOURCE_DIR}/Engine )
+# ADD_SUBDIRECTORY( ${CMAKE_CURRENT_SOURCE_DIR}/Engine )        # 게임 내 환경 관리 클래스
+# ADD_SUBDIRECTORY( ${CMAKE_CURRENT_SOURCE_DIR}/Objects )       # 엔진을 제외한 게임 내 모든 객채 관리
 # ---------------------------------------------------------------------
 
 # Tier 4 Excutable Runfile
